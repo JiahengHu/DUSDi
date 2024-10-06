@@ -1,0 +1,62 @@
+defaults:
+  - env: env_config.yaml
+  - agent: dusdi_diayn
+
+# mode
+reward_free: true
+obs_type: states # [states, pixels]
+frame_stack: 3 # only works if obs_type=pixels
+action_repeat: 1 # set to 2 for pixels
+discount: 0.99 # ??? # 0.95 # 0.99
+# train settings
+num_train_frames: 4000010
+num_seed_frames: 24000 # due to replay buffer sampling from episode, having a large num seed frames is actually important
+# eval
+eval_every_frames: 100000
+num_eval_episodes: 0 #10 # 0
+# replay buffer
+replay_buffer_size: 1000000 # 1000000 (large buffer size) is necessary
+replay_buffer_num_workers: 4
+batch_size: ${agent.batch_size}
+nstep: ${agent.nstep}
+update_encoder: true # should always be true for pre-training
+# misc
+seed: 2 # needs to be > 0
+cuda_id: 0
+save_video: false
+save_train_video: false
+use_tb: false
+use_wandb: true
+
+her: false
+
+# These two should scale proportionally
+update_ratio: 2 # how many env steps per update
+n_env: 4
+
+# task settings
+domain: particle # toy # igibson # moma2d # particle
+
+exp_nm: ""
+
+exp_group:
+  ${domain}
+  ${agent.name}
+  ${exp_nm}
+
+
+experiment:
+  seed:${seed}
+  ${exp_group}
+
+# snapshot
+snapshots: [100000, 500000, 1000000, 2000000, 3000000, 4000000]
+snapshot_dir: ../../../models/${obs_type}/${domain}/${experiment}/${seed}
+
+
+hydra:
+  run:
+    dir: ./exp_local/${now:%Y.%m.%d}/${now:%H%M%S}_${experiment}
+  sweep:
+    dir: ./exp_sweep/${now:%Y.%m.%d}/${now:%H%M}_${experiment}
+    subdir: ${hydra.job.num}

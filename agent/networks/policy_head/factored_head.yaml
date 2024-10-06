@@ -1,0 +1,12 @@
+network: FactoredHead
+
+network_kwargs:
+    hidden_size: 1024
+    num_layers: 2
+    input_size: ???
+    output_size: ???
+    sac: ???
+    log_std_bounds: [-10, 2]
+
+loss_kwargs:
+    loss_coef: 1.0

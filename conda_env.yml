@@ -1,0 +1,35 @@
+name: dusdi
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - pip=21.1.3
+  - numpy=1.23
+  - gymnasium==0.28.1
+  - absl-py=0.13.0
+  - pyparsing=2.4.7
+  - jupyterlab=3.0.14
+  - scikit-image=0.18.1
+  - pip:
+    - termcolor==1.1.0
+    - dm_control
+    - tb-nightly
+    - imageio==2.9.0
+    - imageio-ffmpeg==0.4.4
+    - hydra-core==1.1.0
+    - hydra-submitit-launcher==1.1.5
+    - pandas==1.3.0
+    - ipdb==0.13.9
+    - yapf==0.31.0
+    - sklearn==0.0
+    - matplotlib==3.7.5
+    - opencv-python==4.5.3.56
+    - wandb==0.11.1
+    - moviepy==1.0.3
+    - termcolor
+    - pygame
+    - setuptools==65.5.0
+    - functorch==2.0.0
+    - gym==0.21.0
+    - stable-baselines3==1.6.2
+    - einops==0.7.0

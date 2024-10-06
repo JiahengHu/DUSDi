@@ -1,0 +1,70 @@
+defaults:
+  - env: env_config.yaml
+  - agent: dusdi_diayn
+
+# mode
+reward_free: false
+# task settings
+domain: particle # toy #
+obs_type: states # [states, pixels]
+frame_stack: 3 # only works if obs_type=pixels
+action_repeat: 1 # set to 2 for pixels
+discount: 0.99
+
+ds_task: "poison_l"
+factored: false
+
+test: false
+test_weight: None
+
+# THESE ARE ADDED
+total_timesteps: 150000
+n_steps: 256
+
+# train settings
+num_train_frames: 2000010
+num_seed_frames: 4000
+# eval
+eval_every_frames: 10000
+num_eval_episodes: 3
+# pretrained
+snapshot_ts: 4000000
+snapshot_base_dir: ./models
+low_path:
+  # TODO: figure out the name of this weight, and use it for illustration
+
+# These are used to help with agent initialization
+use_tb: false
+use_wandb: false
+update_encoder: false
+
+# misc
+seed: 1
+device: cuda
+cuda_id: 0
+parallel_wrapper: true
+
+episode_length: 1000
+plot_pred: true
+n_env: 4
+
+dusdi_diayn_type: unwt  # "unwt", "wt", "mono", "nopar"
+
+# experiment
+experiment:
+  ${domain}
+  ${agent.name}
+  ds:${ds_task}
+  n_env:${n_env}
+  n_steps:${n_steps}
+  md_type:${dusdi_diayn_type}
+  ${seed}
+  test:${test}
+
+
+hydra:
+  run:
+    dir: ./downstream/${now:%Y.%m.%d}/${now:%H%M%S}_${experiment}
+  sweep:
+    dir: ./downstream_sweep/${now:%Y.%m.%d}/${now:%H%M}_${agent.name}_${experiment}
+    subdir: ${hydra.job.num}

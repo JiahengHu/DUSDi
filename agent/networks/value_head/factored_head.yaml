@@ -1,0 +1,7 @@
+network: FactoredValueHead
+
+network_kwargs:
+    hidden_size: 1024
+    num_layers: 2
+    input_size: ???
+    output_size: ???

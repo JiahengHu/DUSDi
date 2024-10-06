@@ -1,0 +1,12 @@
+*__pycache__
+.idea/
+exp_local/
+models/
+test_skill/
+downstream/
+unused/
+outputs/
+scripts/test_disentanglement
+figures/
+downstream_sweep/
+exp_sweep/

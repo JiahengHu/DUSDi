@@ -1,0 +1,17 @@
+toy:
+  stochastic: false
+  limit: 5  # size of the map
+  episode_length: 1000
+
+moma2d:
+  show_empty: true  # false: When in empty region, the label is randomly generated
+  episode_length: 1000
+
+particle:
+  N: 10
+  simplify_action_space: true
+  use_img: false
+
+igibson:
+  fullbox: true  # whether to use x & y of the box for classification
+  sep_obj: false  # whether to separate objects
